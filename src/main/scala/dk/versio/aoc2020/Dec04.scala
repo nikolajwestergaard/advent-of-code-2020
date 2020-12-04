@@ -4,14 +4,10 @@ import scala.io.Source
 
 object Dec04 extends App {
 
-  def loadPassports(file: String) = {
-    val s = Source
-      .fromResource(file).getLines()
-      .foldLeft[(List[List[String]], List[String])]((List(), List()))((memo, line) =>
-        if (line.equals("")) (memo._1 :+ memo._2, List()) else (memo._1, memo._2 ::: line.split(" ").toList)
-      )
-    s._1 :+ s._2
-  }
+  def loadPassports(file: String) = Source
+    .fromResource(file).getLines()
+    .foldLeft(List(List[String]()))((list, line) =>
+      if (line.isEmpty) list :+ List() else list.init :+ (list.last ::: line.split(" ").toList))
 
   def getValid(file: String) = loadPassports(file)
     .map(_.filter(!_.startsWith("cid:"))).filter(_.length >= 7)
