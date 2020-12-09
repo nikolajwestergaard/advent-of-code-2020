@@ -4,10 +4,10 @@ import scala.io.Source
 
 object Common {
 
-  def loadNumbers(name: String): List[Int] = Source
+  def loadNumbers(name: String): List[Long] = Source
     .fromResource(name)
     .getLines()
-    .map(_.toInt)
+    .map(_.toLong)
     .toList
 
 }
