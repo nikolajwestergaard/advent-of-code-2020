@@ -14,11 +14,11 @@ object Dec09 extends App {
     if (pre.take(pos).sum == weak) Option(pre.take(pos))
     else if (pre.take(pos).sum > weak) None else isWeak(pre, weak, pos + 1)
 
-  def findWeak(input: List[Long], weak: Long) =
-    input.zipWithIndex.flatMap(l => isWeak(input.drop(l._2), weak)).map(p => p.min + p.max)
+  def findWeak(input: List[Long], weak: Long) = input.zipWithIndex.find(l =>
+    isWeak(input.drop(l._2), weak).isDefined).flatMap(l => isWeak(input.drop(l._2), weak).map(p => p.min + p.max))
 
   val input = Common.loadNumbers("09.txt")
   val weak = Dec09.compute(input.take(25), input.drop(25))
   println(weak)
-  println(findWeak(input, weak).head)
+  println(findWeak(input, weak))
 }

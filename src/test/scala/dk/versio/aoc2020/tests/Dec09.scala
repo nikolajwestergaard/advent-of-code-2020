@@ -13,7 +13,7 @@ class Dec09 extends AnyFlatSpec with should.Matchers {
 
   "Dec 09" should "find weak" in {
     val sample = Common.loadNumbers("09-sample.txt")
-    Dec09.findWeak(sample, 127) shouldBe List(62)
+    Dec09.findWeak(sample, 127) shouldBe Some(62)
   }
 
 
